@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Can't Harley Wait Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class='container'>
+        <form>
+            <div class="form-group">
+                <label for="user_name">Name</label>
+                <input type="text" class="form-control" placeholder="Name" id='name'>
+            </div>
+            <div class="form-group">
+                <label for="user_email">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" id='email'>
+            </div>
+            <div class="form-group">
+                <label for="user_picture">Picture</label>
+                <input type="text" class="form-control" placeholder="Link to a picture of you, preferably with your bike" id="picture">
+            </div>
+            <div class="form-group">
+                <label for="question1">Your friends would describe you as a 'motorcycle enthusiast' above anything else.</label>
+                <select class="form-control" id="question1">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question2">If your motorcylce gets scratched, your day is ruined.</label>
+                <select class="form-control" id="question2">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question3">You can't remember the last weekend you didn't go for a long ride.</label>
+                <select class="form-control" id="question3">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question4">You have more leather boots than flip flops.</label>
+                <select class="form-control" id="question4">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question5">You are looking for a partner who can go on long rides with you and your friends.</label>
+                <select class="form-control" id="question5">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question6">Your ideal partner has a bike of their own, but wouldn't mind saddling up on yours from time to time.</label>
+                <select class="form-control" id="question6">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question7">You find helmet hair sexy.</label>
+                <select class="form-control" id="question7">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question8"><em>Easy Rider</em> is your favorite movie.</label>
+                <select class="form-control" id="question8">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question9">You always lather up with sunblock before hitting the road.</label>
+                <select class="form-control" id="question9">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question10">You love the taste of freedom and the wind on your face.</label>
+                <select class="form-control" id="question10">
+                    <option readonly="readonly">Select One</option>
+                    <option value="1">1 (strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (strongly agree)</option>
+                </select>
+            </div>
+            <button type="submit" id='submit' class="btn btn-primary">Find my Match!</button>
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+allMatches = [];
+
+
+$("#submit").on("click", function() {
+
+    var newMatch = {
+        matchName: $('#name').val(),
+        matchEmail:$('#email').val(),
+        matchPic: $('#picture').val(),
+        matchScores: [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(), $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(), $("#question9").val(), $("#question10").val()]
+    };
+
+    console.log(newMatch);
+
+
+    var currentURL = window.location.origin;
+
+    $.post(currentURL + "/api/matches", newMatch, function(data) {
+        if (data == true) {
+            alert("Yay! It's working!")
+            console.log()
+        }
+        if (data == false) {
+                alert("Sorry this shit don't work")
+            }
+        console.log(currentURL);
+
+
+    });
+
+    return false;
+
+});
+</script>
+
+</html>
