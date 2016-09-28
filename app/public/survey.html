@@ -138,41 +138,118 @@
             <button type="submit" id='submit' class="btn btn-primary">Find my Match!</button>
         </form>
     </div>
+    <!-- modal -->
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">A lifetime of Happiness with...</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal -->
 </body>
 <script type="text/javascript">
-allMatches = [];
+$('#modal').modal({
+    show: false
+});
 
 
 $("#submit").on("click", function() {
 
     var newMatch = {
         matchName: $('#name').val(),
-        matchEmail:$('#email').val(),
+        matchEmail: $('#email').val(),
         matchPic: $('#picture').val(),
-        matchScores: [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(), $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(), $("#question9").val(), $("#question10").val()]
+        matchScores: [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(), $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(), $("#question9").val(), $("#question10").val()],
     };
 
-    console.log(newMatch);
+    var findSum = function() {
+        var sum = 0;
+        for (var j = 0; j < newMatch.matchScores.length; j++) {
+            sum += parseInt(newMatch.matchScores[j]);
+        }
+        newMatch.matchSum = parseInt(sum);
+    }
 
+    findSum();
 
     var currentURL = window.location.origin;
-
     $.post(currentURL + "/api/matches", newMatch, function(data) {
         if (data == true) {
-            alert("Yay! It's working!")
-            console.log()
+            findMatch();
         }
         if (data == false) {
-                alert("Sorry this shit don't work")
-            }
-        console.log(currentURL);
-
-
+            alert("Sorry this shit don't work")
+        }
     });
-
     return false;
 
+
 });
+
+
+var findMatch = function() {
+
+    // Here we get the location of the root page. 
+    // We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+    var currentURL = window.location.origin;
+
+    // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+    $.ajax({
+            url: currentURL + "/api/matches",
+            method: "GET"
+        })
+        .done(function(matchData) {
+
+            // Here we are logging the URL so we have access to it for troubleshooting
+            console.log("------------------------------------");
+            console.log("URL: " + currentURL + "/api/matches");
+            console.log("------------------------------------");
+
+            console.log(matchData);
+            console.log("------------------------------------")
+
+            // find the sum of USER's score:
+
+            var num1 = matchData.length
+            var userNum = num1 - 1
+            var userObj = matchData[userNum];
+            var userName = userObj.matchName;
+            var userPic = userObj.matchPic;
+            var score = parseInt(userObj.matchSum);
+            console.log(score);
+
+            var allSums = [];
+            for (var i = 0; i < matchData.length; i++) {
+                var a = Math.abs(score - matchData[i].matchSum);
+                allSums.push(a);
+            }
+
+            var index = 0;
+            var value = allSums[0];
+            for (var h = 1; h < userNum; h++) {
+                if (allSums[h] < value) {
+                    value = allSums[h];
+                    index = h;
+                }
+            }
+          
+
+            $('#modal .modal-body').html(matchData[index].matchName);
+            $('#modal .modal-body').append('<p><img src=' + userPic + ' width = 200> &hearts; &hearts; <img src=' + matchData[index].matchPic + ' width =200></p>');
+             $('#modal .modal-body').append('<p>Contact: ' + matchData[index].matchEmail + '</p>');
+            $('#modal').modal('show');
+        });
+};
 </script>
 
 </html>
