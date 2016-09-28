@@ -15,20 +15,15 @@
         <form>
             <div class="form-group">
                 <label for="user_name">Name</label>
-                <input type="text" class="form-control" placeholder="Name" id='name'>
-            </div>
-            <div class="form-group">
-                <label for="user_email">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" id='email'>
+                <input type="text" name="" id="name" class="form-control" placeholder='Enter your name' required>
             </div>
             <div class="form-group">
                 <label for="user_picture">Picture</label>
-                <input type="text" class="form-control" placeholder="Link to a picture of you, preferably with your bike" id="picture">
+                <input type="text" class="form-control" placeholder="Link to a picture of you, preferably with your bike" id="picture" required>
             </div>
             <div class="form-group">
                 <label for="question1">Your friends would describe you as a 'motorcycle enthusiast' above anything else.</label>
                 <select class="form-control" id="question1">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -39,7 +34,6 @@
             <div class="form-group">
                 <label for="question2">If your motorcylce gets scratched, your day is ruined.</label>
                 <select class="form-control" id="question2">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -50,7 +44,6 @@
             <div class="form-group">
                 <label for="question3">You can't remember the last weekend you didn't go for a long ride.</label>
                 <select class="form-control" id="question3">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -61,7 +54,6 @@
             <div class="form-group">
                 <label for="question4">You have more leather boots than flip flops.</label>
                 <select class="form-control" id="question4">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -72,7 +64,6 @@
             <div class="form-group">
                 <label for="question5">You are looking for a partner who can go on long rides with you and your friends.</label>
                 <select class="form-control" id="question5">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -83,7 +74,6 @@
             <div class="form-group">
                 <label for="question6">Your ideal partner has a bike of their own, but wouldn't mind saddling up on yours from time to time.</label>
                 <select class="form-control" id="question6">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -94,7 +84,6 @@
             <div class="form-group">
                 <label for="question7">You find helmet hair sexy.</label>
                 <select class="form-control" id="question7">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -105,7 +94,6 @@
             <div class="form-group">
                 <label for="question8"><em>Easy Rider</em> is your favorite movie.</label>
                 <select class="form-control" id="question8">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -116,7 +104,6 @@
             <div class="form-group">
                 <label for="question9">You always lather up with sunblock before hitting the road.</label>
                 <select class="form-control" id="question9">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -127,7 +114,6 @@
             <div class="form-group">
                 <label for="question10">You love the taste of freedom and the wind on your face.</label>
                 <select class="form-control" id="question10">
-                    <option readonly="readonly">Select One</option>
                     <option value="1">1 (strongly disagree)</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -143,14 +129,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">A lifetime of Happiness with...</h4>
                 </div>
                 <div class="modal-body">
                     <p>One fine body&hellip;</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id='close-modal'>&#x1f494; no thanks, find a different match</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id='go-home'> &#8962; back to home</button>
                 </div>
             </div>
         </div>
@@ -165,12 +151,13 @@ $('#modal').modal({
 
 $("#submit").on("click", function() {
 
+
     var newMatch = {
         matchName: $('#name').val(),
-        matchEmail: $('#email').val(),
         matchPic: $('#picture').val(),
         matchScores: [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(), $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(), $("#question9").val(), $("#question10").val()],
     };
+
 
     var findSum = function() {
         var sum = 0;
@@ -182,6 +169,9 @@ $("#submit").on("click", function() {
 
     findSum();
 
+
+
+
     var currentURL = window.location.origin;
     $.post(currentURL + "/api/matches", newMatch, function(data) {
         if (data == true) {
@@ -192,8 +182,6 @@ $("#submit").on("click", function() {
         }
     });
     return false;
-
-
 });
 
 
@@ -230,7 +218,7 @@ var findMatch = function() {
 
             var allSums = [];
             for (var i = 0; i < matchData.length; i++) {
-                var a = Math.abs(score - matchData[i].matchSum);
+                var a = parseInt(Math.abs(score - matchData[i].matchSum));
                 allSums.push(a);
             }
 
@@ -242,13 +230,21 @@ var findMatch = function() {
                     index = h;
                 }
             }
-          
 
-            $('#modal .modal-body').html(matchData[index].matchName);
-            $('#modal .modal-body').append('<p><img src=' + userPic + ' width = 200> &hearts; &hearts; <img src=' + matchData[index].matchPic + ' width =200></p>');
-             $('#modal .modal-body').append('<p>Contact: ' + matchData[index].matchEmail + '</p>');
+
+            $('#modal .modal-body').html('<h1>' + matchData[index].matchName + '</h1>');
+            $('#modal .modal-body').append('<p><img src=' + matchData[index].matchPic + ' width = 200> &hearts; &hearts; &hearts; <img src=' + userPic + ' width =200></p>');
             $('#modal').modal('show');
-        });
+
+            $("#close-modal").on("click", function() {
+                location.reload()
+
+            });
+            $("#go-home").on("click", function() {
+                 window.location = '/home';
+
+            });
+        })
 };
 </script>
 
