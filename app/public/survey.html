@@ -187,26 +187,24 @@ $("#submit").on("click", function() {
 
 var findMatch = function() {
 
-    // Here we get the location of the root page. 
-    // We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+  // get the location of the root page
     var currentURL = window.location.origin;
 
-    // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+    //grab the data associated with the local host
     $.ajax({
             url: currentURL + "/api/matches",
             method: "GET"
         })
         .done(function(matchData) {
 
-            // Here we are logging the URL so we have access to it for troubleshooting
-            console.log("------------------------------------");
-            console.log("URL: " + currentURL + "/api/matches");
-            console.log("------------------------------------");
+            // console.log("------------------------------------");
+            // console.log("URL: " + currentURL + "/api/matches");
+            // console.log("------------------------------------");
 
-            console.log(matchData);
-            console.log("------------------------------------")
+            // console.log(matchData);
+            // console.log("------------------------------------")
 
-            // find the sum of USER's score:
+            // grab the users's data & save it temporarily so we can match with it:
 
             var num1 = matchData.length
             var userNum = num1 - 1
