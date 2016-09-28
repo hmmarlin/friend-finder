@@ -1,4 +1,5 @@
 // Dependencies
+var cool = require('cool-ascii-faces');
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -20,6 +21,10 @@ app.use(bodyParser.json({
 // Links to html routes
 require('./app/routing/api-routes.js')(app);
 require('./app/routing/html-routes.js')(app);
+
+app.get('/cool', function(request, response) {
+  response.send(cool());
+});
 
 app.listen(PORT, function() {
     console.log('App listening on PORT ' + PORT);
